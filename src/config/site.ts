@@ -1,4 +1,4 @@
-import { SiteConfig } from "@/types";
+import { SiteConfig } from "../app/types";
 
 export const siteConfig: SiteConfig = {
   name: "Solana Actions and Blinks",
