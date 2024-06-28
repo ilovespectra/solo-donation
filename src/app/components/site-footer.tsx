@@ -3,7 +3,7 @@ import * as React from "react";
 import { siteConfig } from "../../config/site";
 import { cn } from "../lib/utils";
 import { Icons } from "../components/icons";
-import { ThemeModeToggle } from "../components/theme-mode-toggle";
+// import { ThemeModeToggle } from "../components/theme-mode-toggle";
 import { Button, buttonVariants } from "../components/ui/button";
 import Link from "next/link";
 
@@ -49,7 +49,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
             </Link>
           </Button>
 
-          <ThemeModeToggle />
+         
         </nav>
       </div>
     </footer>
