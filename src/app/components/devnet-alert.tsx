@@ -5,9 +5,9 @@ export function DevnetAlert() {
   return (
     <Alert variant={"caution"}>
       <TriangleAlertIcon className="size-5" />
-      <AlertTitle>Devnet ONLY</AlertTitle>
+      <AlertTitle>devnet only</AlertTitle>
       <AlertDescription>
-        This example action is configured to run on Solana&apos;s devnet. Make
+        this example action is configured to run on Solana&apos;s devnet. Make
         your your wallet is selected to devnet when testing this transaction.
       </AlertDescription>
     </Alert>
