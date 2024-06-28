@@ -1,14 +1,14 @@
 import { SiteConfig } from "../app/types";
 
 export const siteConfig: SiteConfig = {
-  name: "Solana Actions and Blinks",
+  name: "solo ",
   description: "",
   url: "https://",
-  ogImage: "https://tx.shadcn.com/og.jpg",
+  ogImage: "https://github.com/ilovespectra/solo-donation/blob/main/public/solo.png",
   links: {
-    twitter: "https://twitter.com/nickfrosty",
+    twitter: "https://twitter.com/ilovespectra",
     github:
-      "https://github.com/solana-developers/solana-actions/tree/main/examples/next-js",
-    docs: "https://solana.com/docs/advanced/actions",
+      "https://github.com/ilovespectra/solo-explorer",
+    docs: "https://solo-docs.vercel.app",
   },
 };
