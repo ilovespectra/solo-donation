@@ -1,19 +1,19 @@
 "use client";
 
 import * as React from "react";
-import { useTheme } from "next-themes";
+// import { useTheme } from "next-themes";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Icons } from "@/components/icons";
+} from "../components/ui/dropdown-menu";
+import { Icons } from "../components/icons";
 
 export function ThemeModeToggle() {
-  const { setTheme } = useTheme();
+  // const { setTheme } = useTheme();
 
   return (
     <DropdownMenu>
@@ -25,15 +25,15 @@ export function ThemeModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem onClick={() => ("light")}>
           <Icons.sun className="mr-2 h-4 w-4" />
           <span>Light</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem onClick={() => ("dark")}>
           <Icons.moon className="mr-2 h-4 w-4" />
           <span>Dark</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem onClick={() => ("system")}>
           <Icons.laptop className="mr-2 h-4 w-4" />
           <span>System</span>
         </DropdownMenuItem>
