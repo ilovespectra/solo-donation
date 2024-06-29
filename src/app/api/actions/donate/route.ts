@@ -21,13 +21,13 @@ import {
       const { toPubkey } = validatedQueryParams(requestUrl);
   
       const baseHref = new URL(
-        `/api/actions/transfer-sol?to=${toPubkey.toBase58()}`,
+        `/api/actions/donate?to=${toPubkey.toBase58()}`,
         requestUrl.origin,
       ).toString();
   
       const payload: ActionGetResponse = {
         title: "donate sol to solo",
-        icon: new URL("/solo.png", requestUrl.origin).toString(),
+        icon: new URL("/donate.png", requestUrl.origin).toString(),
         description: "donate sol to solo",
         label: "transfer", 
         links: {
