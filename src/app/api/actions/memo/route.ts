@@ -14,80 +14,51 @@ import {
     Transaction,
     TransactionInstruction,
   } from "@solana/web3.js";
+  import { NextApiRequest, NextApiResponse } from 'next';
   
-  // Declare FetchEvent type
-  interface FetchEvent extends Event {
-    request: Request;
-    respondWith(response: Promise<Response> | Response): void;
-  }
+  // Helper function to handle CORS
+  const handleCors = (res: NextApiResponse) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  };
   
-  addEventListener("fetch", (event: any) => {
-    const fetchEvent = event as FetchEvent;
-    fetchEvent.respondWith(handleRequest(fetchEvent.request));
-  });
+  const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+    handleCors(res);
   
-  async function handleRequest(request: Request): Promise<Response> {
-    if (request.method === "OPTIONS") {
-      return handleOptions();
-    } else if (request.method === "GET") {
-      return handleGet(request);
-    } else if (request.method === "POST") {
-      return handlePost(request);
+    if (req.method === 'OPTIONS') {
+      return res.status(200).end();
+    } else if (req.method === 'GET') {
+      return handleGet(req, res);
+    } else if (req.method === 'POST') {
+      return await handlePost(req, res);
     } else {
-      return new Response(null, {
-        status: 405,
-        statusText: "Method Not Allowed",
-        headers: {
-          "Allow": "GET, POST, OPTIONS",
-          "Access-Control-Allow-Origin": "*",
-        },
-      });
+      res.setHeader('Allow', 'GET, POST, OPTIONS');
+      return res.status(405).end('Method Not Allowed');
     }
-  }
+  };
   
-  function handleOptions(): Response {
-    // Handle preflight requests
-    return new Response(null, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
-    });
-  }
-  
-  function handleGet(request: Request): Response {
-    // Handle GET requests
+  const handleGet = (req: NextApiRequest, res: NextApiResponse) => {
+    const url = req.url ? new URL(req.url, `http://${req.headers.host}`) : new URL('http://example.com');
     const payload: ActionGetResponse = {
-      icon: new URL("/solo.png", new URL(request.url).origin).toString(),
+      icon: new URL("/solo.png", url.origin).toString(),
       label: "solo memo",
       description: "this is a memo action for solo",
       title: "memo action",
     };
   
-    return new Response(JSON.stringify(payload), {
-      headers: {
-        ...ACTIONS_CORS_HEADERS,
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
-  }
+    return res.status(200).json(payload);
+  };
   
-  async function handlePost(request: Request): Promise<Response> {
+  const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-      const body: ActionPostRequest = await request.json();
+      const body: ActionPostRequest = req.body;
   
       let account: PublicKey;
       try {
         account = new PublicKey(body.account);
       } catch (err) {
-        return new Response('invalid "account" provided', {
-          status: 400,
-          headers: {
-            ...ACTIONS_CORS_HEADERS,
-            "Access-Control-Allow-Origin": "*",
-          },
-        });
+        return res.status(400).json('invalid "account" provided');
       }
   
       const transaction = new Transaction();
@@ -96,7 +67,6 @@ import {
         ComputeBudgetProgram.setComputeUnitPrice({
           microLamports: 1000,
         }),
-  
         new TransactionInstruction({
           programId: new PublicKey(MEMO_PROGRAM_ID),
           data: Buffer.from("this is a simple message", "utf8"),
@@ -116,20 +86,11 @@ import {
       const connection = new Connection(clusterApiUrl("devnet"));
       transaction.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
   
-      return new Response(JSON.stringify(payload), {
-        headers: {
-          ...ACTIONS_CORS_HEADERS,
-          "Access-Control-Allow-Origin": "*",
-        },
-      });
+      return res.status(200).json(payload);
     } catch (err) {
-      return new Response("an unknown error occurred", {
-        status: 404,
-        headers: {
-          ...ACTIONS_CORS_HEADERS,
-          "Access-Control-Allow-Origin": "*",
-        },
-      });
+      return res.status(500).json("an unknown error occurred");
     }
-  }
+  };
+  
+  export default handler;
   
