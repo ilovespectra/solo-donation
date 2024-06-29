@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import {
   ACTIONS_CORS_HEADERS,
   ActionGetResponse,
@@ -17,29 +17,14 @@ import {
 } from "@solana/web3.js";
 
 // Helper function to handle CORS
-const handleCors = (res: NextApiResponse) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+const handleCors = (res: NextResponse) => {
+  res.headers.set('Access-Control-Allow-Origin', '*');
+  res.headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.headers.set('Access-Control-Allow-Headers', 'Content-Type');
 };
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  handleCors(res);
-
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  } else if (req.method === 'GET') {
-    return handleGet(req, res);
-  } else if (req.method === 'POST') {
-    return await handlePost(req, res);
-  } else {
-    res.setHeader('Allow', 'GET, POST, OPTIONS');
-    return res.status(405).end('Method Not Allowed');
-  }
-};
-
-const handleGet = (req: NextApiRequest, res: NextApiResponse) => {
-  const url = req.url ? new URL(req.url, `http://${req.headers.host}`) : new URL('http://example.com');
+export const GET = async (req: NextRequest) => {
+  const url = req.nextUrl;
   const payload: ActionGetResponse = {
     icon: new URL("/solo.png", url.origin).toString(),
     label: "solo memo",
@@ -47,18 +32,24 @@ const handleGet = (req: NextApiRequest, res: NextApiResponse) => {
     title: "memo action",
   };
 
-  return res.status(200).json(payload);
+  const res = NextResponse.json(payload);
+  handleCors(res);
+  return res;
 };
 
-const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
+export const POST = async (req: NextRequest) => {
   try {
-    const body: ActionPostRequest = req.body;
+    const body: ActionPostRequest = await req.json();
 
     let account: PublicKey;
     try {
       account = new PublicKey(body.account);
     } catch (err) {
-      return res.status(400).json('invalid "account" provided');
+      const res = new NextResponse('invalid "account" provided', {
+        status: 400,
+      });
+      handleCors(res);
+      return res;
     }
 
     const transaction = new Transaction();
@@ -86,10 +77,22 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
     const connection = new Connection(clusterApiUrl("devnet"));
     transaction.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
 
-    return res.status(200).json(payload);
+    const res = NextResponse.json(payload);
+    handleCors(res);
+    return res;
   } catch (err) {
-    return res.status(500).json("an unknown error occurred");
+    const res = new NextResponse("an unknown error occurred", {
+      status: 500,
+    });
+    handleCors(res);
+    return res;
   }
 };
 
-export default handler;
+export const OPTIONS = async (req: NextRequest) => {
+  const res = new NextResponse(null, {
+    status: 200,
+  });
+  handleCors(res);
+  return res;
+};
