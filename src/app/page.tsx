@@ -26,10 +26,11 @@ export default function Pages() {
         "container space-y-12 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24"
       }
     >
+      <center>
       <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-6 text-center">
-        <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
+        <h1 className="font-heading text-3xl mt-5 mb-5 leading-[1.1] sm:text-3xl md:text-6xl">
           donate sol to solo
-        </h2>
+        </h1>
       </div>
 
       <Card className="group-hover:border-primary size-[400px] rounded overflow-hidden text-center flex items-center justify-center w-min mx-auto">
@@ -47,7 +48,7 @@ export default function Pages() {
 
       <Card className="group-hover:border-primary">
         <CardHeader>
-          <CardTitle className="space-y-3">action endpoint</CardTitle>
+          <CardTitle className="space-y-3 mb-5">action endpoint</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
           <p className="text-muted-foreground">
@@ -61,6 +62,7 @@ export default function Pages() {
           </p>
         </CardContent>
       </Card>
+      </center>
     </section>
   );
 }
