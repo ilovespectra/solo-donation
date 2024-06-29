@@ -26,22 +26,22 @@ export const GET = async (req: Request) => {
     ).toString();
 
     const payload: ActionGetResponse = {
-      title: "donate sol to solo",
+      title: "sol for solo",
       icon: new URL("/donate.png", requestUrl.origin).toString(),
-      description: "donate sol to solo",
+      description: "contribute to the development of open source public goods under the solo umbrella- solo journal, solo explorer, and solo swap.",
       label: "transfer",
       links: {
         actions: [
           {
-            label: "send 1 sol",
+            label: "1 sol",
             href: `${baseHref}&amount=1`,
           },
           {
-            label: "send 5 sol",
+            label: "5 sol",
             href: `${baseHref}&amount=5`,
           },
           {
-            label: "send 10 sol",
+            label: "10 sol",
             href: `${baseHref}&amount=10`,
           },
           {
@@ -50,7 +50,7 @@ export const GET = async (req: Request) => {
             parameters: [
               {
                 name: "amount",
-                label: "enter the amount of sol to send",
+                label: "custom amount",
                 required: true,
               },
             ],
