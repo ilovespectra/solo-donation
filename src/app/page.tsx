@@ -29,7 +29,7 @@ export default function Pages() {
       <center>
       <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-6 text-center">
         <h1 className="font-heading text-3xl mt-5 mb-5 leading-[1.1] sm:text-3xl md:text-6xl">
-          donate sol to solo
+          sol for solo
         </h1>
       </div>
 
