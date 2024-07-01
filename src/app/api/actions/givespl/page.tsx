@@ -47,7 +47,7 @@ export default function Pages() {
         />
       </Card>
 
-      <div className="mx-auto text-center md:max-w-[58rem]">
+      {/* <div className="mx-auto text-center md:max-w-[58rem]">
         <p className="leading-normal text-muted-foreground sm:text-lg sm:leading-7">
           view the{" "}
           <Button variant={"link"} asChild>
@@ -60,7 +60,7 @@ export default function Pages() {
           </Button>{" "}
           on github.
         </p>
-      </div>
+      </div> */}
 
       <Card className="group-hover:border-primary">
         <CardHeader>
