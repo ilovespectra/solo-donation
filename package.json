@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@radix-ui/react-slot": "^1.1.0",
     "@solana/actions": "^1.0.2",
     "@solana/web3.js": "^1.93.4",
     "class-variance-authority": "^0.7.0",
+    "framer-motion": "^11.2.12",
     "lucide-react": "^0.399.0",
     "next": "14.2.4",
     "react": "^18",
