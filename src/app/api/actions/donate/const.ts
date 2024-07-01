@@ -5,3 +5,9 @@ export const DEFAULT_SOL_ADDRESS: PublicKey = new PublicKey(
 );
 
 export const DEFAULT_SOL_AMOUNT: number = 1.0;
+
+export const DEFAULT_SPL_ADDRESS: PublicKey = new PublicKey(
+  "2GbS1nfoRUCGQEmuXmyaNDcoUBsUKoKVg58boiyiGuav", // mainnet wallet
+);
+
+export const DEFAULT_SPL_AMOUNT: number = 1.0;
