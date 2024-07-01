@@ -8,7 +8,7 @@ import { siteConfig } from "@/src/config/site";
 import { useEffect, useState } from "react";
 
 export default function Pages() {
-  const apiPath = "/api/actions/givespl";
+  const apiPath = "/api/actions/transfer-spl";
   const [apiEndpoint, setApiEndpoint] = useState("");
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function Pages() {
 
       <Card className="group-hover:border-primary">
         <CardHeader>
-          <CardTitle className="space-y-3">Action Endpoint</CardTitle>
+          <CardTitle className="space-y-3">action endpoint</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
           <p className="text-muted-foreground">
