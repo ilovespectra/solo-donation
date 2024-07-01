@@ -26,13 +26,14 @@ export default function Pages() {
         "container space-y-12 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24"
       }
     >
+      <center>
       <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-6 text-center">
         <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-          Transfer SPL Tokens
+          transfer spl tokens
         </h2>
         <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-          The following example demonstrates how to transfer SPL tokens using an
-          Action and the SPL Token program.
+          the following example demonstrates how to transfer spl tokens using an
+          action and the spl token program.
         </p>
       </div>
 
@@ -48,16 +49,16 @@ export default function Pages() {
 
       <div className="mx-auto text-center md:max-w-[58rem]">
         <p className="leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-          View the{" "}
+          view the{" "}
           <Button variant={"link"} asChild>
             <Link
-              href={`${siteConfig.links.github}/src/app${apiPath}/route.ts`}
+              href={`${siteConfig.links.oggithub}/src/app${apiPath}/route.ts`}
               target="_blank"
             >
-              source code for this sample Action
+              source code for this sample action
             </Link>
           </Button>{" "}
-          on GitHub.
+          on github.
         </p>
       </div>
 
@@ -77,6 +78,7 @@ export default function Pages() {
           </p>
         </CardContent>
       </Card>
+      </center>
     </section>
   );
 }
