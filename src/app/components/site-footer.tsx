@@ -44,7 +44,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
                 "px-4",
               )}
             >
-              <i>actions docs</i>
+              <i>view actions docs</i>
             </Link>
           </Button>
 
