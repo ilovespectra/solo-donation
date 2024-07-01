@@ -33,14 +33,14 @@ import {
       ).toString();
   
       const payload: ActionGetResponse = {
-        title: "Transfer SPL Tokens",
+        title: "transfer dean tokens",
         icon: new URL("/senddean.png", requestUrl.origin).toString(),
-        description: "Transfer SPL tokens to a specified address.",
+        description: "transfer dean tokens to solo.",
         label: "transfer",
         links: {
           actions: [
             {
-              label: "Send SPL Tokens",
+              label: "send $dean",
               href: `${baseHref}&amount={amount}`,
               parameters: [
                 {
